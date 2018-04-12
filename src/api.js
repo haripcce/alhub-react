@@ -13,6 +13,8 @@ export default {
     resetPasswordRequest: email =>
       axios.post("/users/reset_password_request", { email }),
     validateToken: token => axios.post("/users/validate_token", { token }),
-    resetPassword: data => axios.post("/users/reset_password", { data })
+    resetPassword: data => axios.post("/users/reset_password", { data }),
+    fetchCurrentUser:()=> 
+		axios.get('/users/me').then(res => res.data)
   }
 };
