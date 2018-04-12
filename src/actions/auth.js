@@ -1,6 +1,7 @@
 import { USER_LOGGED_IN, USER_LOGGED_OUT } from "../types";
 import api from "../api";
 import setAuthorizationHeader from "../utils/setAuthorizationHeader";
+import decode from 'jwt-decode';
 
 export const userLoggedIn = user => ({
   type: USER_LOGGED_IN,
@@ -15,7 +16,11 @@ export const login = credentials => dispatch =>
   api.user.login(credentials).then(user => {
     localStorage.bookwormJWT = user.token;
     setAuthorizationHeader(user.token);
-    dispatch(userLoggedIn(user));
+
+    const payload = decode(localStorage.bookwormJWT)
+    const userData = {...user, confirmed:payload.confirmed };
+  
+    dispatch(userLoggedIn(userData));
   });
 
 export const logout = () => dispatch => {
