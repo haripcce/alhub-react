@@ -14,6 +14,8 @@ import GuestRoute from "./components/routes/GuestRoute";
 import TopNavigation from "./components/navigation/TopNavigation";
 import  Loader  from 'react-loader';
 import { fetchCurrentUser } from './actions/users';
+import {IntlProvider, FormattedMessage} from 'react-intl';
+import messages from './messages';
 
 class App extends Component {
 
@@ -23,8 +25,12 @@ class App extends Component {
 	}
 
 	render() {
-		const {location,isAuthenticated,loaded} = this.props;
+		const {location,isAuthenticated,loaded, lang} = this.props;
 		return (
+			<IntlProvider 
+			locale={lang}
+			messages={messages[lang]}
+			>
 			<div className="ui container">
 			<Loader loaded={loaded}>
 			{isAuthenticated && <TopNavigation />}
@@ -38,6 +44,7 @@ class App extends Component {
 			<UserRoute  location={location} path="/dashboard" exact component={DashboardPage} />
 			</Loader>
 			</div>
+			</IntlProvider>
 		);
 	}
 }
@@ -49,13 +56,15 @@ App.propTypes = {
   }).isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   loaded: PropTypes.bool.isRequired,
-  fetchCurrentUser: PropTypes.func.isRequired
+	fetchCurrentUser: PropTypes.func.isRequired,
+	lang: PropTypes.string.isRequired
 };
 
 function mapStateToProps(state) {
   return {
     isAuthenticated: !!state.user.email,
-    loaded: state.user.loaded
+		loaded: state.user.loaded,
+		lang:state.locale.lang
   };
 }
 
