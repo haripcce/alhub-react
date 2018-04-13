@@ -1,4 +1,16 @@
 import React, { Component } from 'react';
+import * as glamor from 'glamor';
+import glamorous from 'glamorous';
+
+const fadeIn = () => {
+    const style = glamor.css.keyframes({
+        '0%': {opacity: '0'},
+        '100%':{opacity:'1'}
+    });
+    return {animation:`${style} 1s`};
+}
+
+const FadeInDiv = glamorous.div(fadeIn);
 
 class NewCharacterPage extends Component {
 
@@ -37,29 +49,29 @@ class NewCharacterPage extends Component {
                 </nav>
                 <div>
                     {this.state.step === 1 && 
-                    <div>
+                    <FadeInDiv>
                         <h2>STEP 1</h2>
-                    </div>
+                    </FadeInDiv>
                     }
                     {this.state.step === 2 && 
-                    <div>
+                    <FadeInDiv>
                         <h2>STEP 2</h2>
-                    </div>
+                    </FadeInDiv>
                     }
                     {this.state.step === 3 && 
-                    <div>
+                    <FadeInDiv>
                         <h2>STEP 3</h2>
-                    </div>
+                    </FadeInDiv>
                     }
                     {this.state.step === 4 && 
-                    <div>
+                    <FadeInDiv>
                         <h2>STEP 4</h2>
-                    </div>
+                    </FadeInDiv>
                     }
                     {this.state.step === 5 && 
-                    <div>
+                    <FadeInDiv>
                         <h2>STEP 5</h2>
-                    </div>
+                    </FadeInDiv>
                     }
                 </div>
             </div>
