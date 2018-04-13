@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Route } from "react-router-dom";
+import { Router, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
@@ -19,6 +19,7 @@ import { fetchCurrentUserRequest, fetchCurrentUserSuccess } from "./actions/user
 import { localeSet } from "./actions/locale";
 import createSagaMiddleware from 'redux-saga'
 import  rootSaga  from "./rootSaga";
+import history from './history';
 
 // create the saga middleware
 const sagaMiddleware = createSagaMiddleware();
@@ -43,11 +44,11 @@ if (localStorage.bookwormJWT) {
 }
 
 ReactDOM.render(
-  <BrowserRouter>
+  <Router history={history}>
     <Provider store={store}>
       <Route component={App} />
     </Provider>
-  </BrowserRouter>,
+  </Router>,
   document.getElementById("root")
 );
 registerServiceWorker();
