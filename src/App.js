@@ -16,6 +16,8 @@ import  Loader  from 'react-loader';
 import { fetchCurrentUser } from './actions/users';
 import {IntlProvider, FormattedMessage} from 'react-intl';
 import messages from './messages';
+import CharactersPage from './components/pages/CharactersPage';
+import NewCharacterPage from './components/pages/NewCharacterPage';
 
 class App extends Component {
 
@@ -33,8 +35,9 @@ class App extends Component {
 			>
 			<div className="ui container">
 			<Loader loaded={loaded}>
-			{isAuthenticated && <TopNavigation />}
 
+			{isAuthenticated && <TopNavigation />}
+		
 			<Route      location={location} path="/" exact component={HomePage} />
 			<Route      location={location} path="/confirmation/:token" exact component={ConfirmationPage} />
 			<GuestRoute location={location} path="/forgot_password" exact component={ForgotPasswordPage} />
@@ -42,6 +45,8 @@ class App extends Component {
 			<GuestRoute location={location} path="/login" exact component={LoginPage} />
 			<GuestRoute location={location} path="/signup" exact component={SignupPage} />
 			<UserRoute  location={location} path="/dashboard" exact component={DashboardPage} />
+			<UserRoute  location={location} path="/characters" exact component={CharactersPage} />
+			<UserRoute  location={location} path="/characters/new" exact component={NewCharacterPage} />
 			</Loader>
 			</div>
 			</IntlProvider>
