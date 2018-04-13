@@ -5,6 +5,7 @@ import isEmail from "validator/lib/isEmail";
 import { createUserRequest } from "../../actions/users";
 import { connect } from 'react-redux';
 
+
 class SignupForm extends React.Component {
   state = {
     data: {
@@ -14,6 +15,10 @@ class SignupForm extends React.Component {
     },
     errors: {}
   };
+
+ componentWillReceiveProps(nextProps){
+  this.setState({errors:nextProps.serverErrors})
+ }
 
   onChange = e =>
     this.setState({
@@ -107,6 +112,12 @@ SignupForm.propTypes = {
   submit: PropTypes.func.isRequired
 };
 
-export default connect(null, { submit: createUserRequest })(
+function mapStateToProps(state){
+return {
+  serverErrors : state.formErrors.signup
+}
+}
+
+export default connect(mapStateToProps, { submit: createUserRequest })(
   SignupForm
 );
