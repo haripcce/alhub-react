@@ -15,8 +15,7 @@ import registerServiceWorker from "./registerServiceWorker";
 import rootReducer from "./rootReducer";
 import { userLoggedIn } from "./actions/auth";
 import setAuthorizationHeader from "./utils/setAuthorizationHeader";
-import { fetchCurrentUser } from "./actions/users";
-import { userFetched } from "./actions/auth";
+import { fetchCurrentUserRequest, fetchCurrentUserSuccess } from "./actions/users";
 import { localeSet } from "./actions/locale";
 import createSagaMiddleware from 'redux-saga'
 import  rootSaga  from "./rootSaga";
@@ -38,9 +37,9 @@ if (localStorage.alhubLang){
 }
 if (localStorage.bookwormJWT) {
   setAuthorizationHeader(localStorage.bookwormJWT);
-  store.dispatch(fetchCurrentUser());
+  store.dispatch(fetchCurrentUserRequest());
 }else{
-  store.dispatch(userFetched({loaded:true}));
+  store.dispatch(fetchCurrentUserSuccess({}));
 }
 
 ReactDOM.render(

@@ -14,3 +14,13 @@ export function* createUserSaga(action) {
   }
 
   }
+
+
+  export function* fetchUserSaga(action){
+    try{
+      const user = yield call(api.user.fetchCurrentUser);
+      yield put(userLoggedIn(user)); 
+    }catch(err){
+      console.log(err.response.data); 
+    }
+  }

@@ -1,4 +1,4 @@
-import { USER_LOGGED_IN, USER_LOGGED_OUT } from "../types";
+import { USER_LOGGED_IN, USER_LOGGED_OUT, FETCH_CURRENT_USER_SUCCESS } from "../types";
 import { USER_FETCHED } from './../types';
 
 export default function user(state = {loaded:false}, action = {}) {
@@ -7,7 +7,7 @@ export default function user(state = {loaded:false}, action = {}) {
       return {...action.user,loaded:true};
     case USER_LOGGED_OUT:
       return {loaded:true};
-      case USER_FETCHED:
+      case FETCH_CURRENT_USER_SUCCESS:
 		return {...state,...action.user,loaded:true}
     default:
       return state;

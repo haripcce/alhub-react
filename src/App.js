@@ -13,7 +13,7 @@ import UserRoute from "./components/routes/UserRoute";
 import GuestRoute from "./components/routes/GuestRoute";
 import TopNavigation from "./components/navigation/TopNavigation";
 import  Loader  from 'react-loader';
-import { fetchCurrentUser } from './actions/users';
+import { fetchCurrentUserRequest } from './actions/users';
 import {IntlProvider, FormattedMessage} from 'react-intl';
 import messages from './messages';
 import CharactersPage from './components/pages/CharactersPage';
@@ -22,7 +22,7 @@ import NewCharacterPage from './components/pages/NewCharacterPage';
 class App extends Component {
 
 	componentDidMount(){
-	if(this.props.isAuthenticated) this.props.fetchCurrentUser();
+	if(this.props.isAuthenticated) this.props.fetchCurrentUserRequest();
 
 	}
 
@@ -61,7 +61,7 @@ App.propTypes = {
   }).isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   loaded: PropTypes.bool.isRequired,
-	fetchCurrentUser: PropTypes.func.isRequired,
+	fetchCurrentUserRequest: PropTypes.func.isRequired,
 	lang: PropTypes.string.isRequired
 };
 
@@ -73,4 +73,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps,{fetchCurrentUser})(App);
+export default connect(mapStateToProps,{fetchCurrentUserRequest})(App);

@@ -1,6 +1,6 @@
 import api from "../api";
 import {  userFetched } from "./auth";
-import { CREATE_USER_REQUEST, CREATE_USER_FAILURE } from './../types';
+import { CREATE_USER_REQUEST, CREATE_USER_FAILURE, FETCH_CURRENT_USER_REQUEST, FETCH_CURRENT_USER_SUCCESS } from './../types';
 
 
   export const createUserRequest = user => ({
@@ -11,8 +11,14 @@ import { CREATE_USER_REQUEST, CREATE_USER_FAILURE } from './../types';
     type: CREATE_USER_FAILURE,
     errors
   });
-  
 
-  export const fetchCurrentUser = () => (dispatch) => 
-	api.user.fetchCurrentUser().then((user) => dispatch(userFetched({...user,loaded:true})));
+  export const fetchCurrentUserRequest = () => ({
+    type: FETCH_CURRENT_USER_REQUEST
+  });
+  
+  export const fetchCurrentUserSuccess = user => ({
+    type: FETCH_CURRENT_USER_SUCCESS,
+    user
+  });
+  
   
