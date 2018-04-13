@@ -18,14 +18,21 @@ import setAuthorizationHeader from "./utils/setAuthorizationHeader";
 import { fetchCurrentUser } from "./actions/users";
 import { userFetched } from "./actions/auth";
 import { localeSet } from "./actions/locale";
+import createSagaMiddleware from 'redux-saga'
+import  rootSaga  from "./rootSaga";
+
+// create the saga middleware
+const sagaMiddleware = createSagaMiddleware();
 
 addLocaleData(en);
 addLocaleData(ru);
 
 const store = createStore(
   rootReducer,
-  composeWithDevTools(applyMiddleware(thunk))
+  composeWithDevTools(applyMiddleware(sagaMiddleware, thunk))
 );
+
+sagaMiddleware.run(rootSaga);
 if (localStorage.alhubLang){
   store.dispatch(localeSet(localStorage.alhubLang));
 }

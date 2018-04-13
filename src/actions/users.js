@@ -1,10 +1,11 @@
 import api from "../api";
-import { userLoggedIn, userFetched } from "./auth";
+import {  userFetched } from "./auth";
+import { CREATE_USER_REQUEST } from './../types';
 
-export const signup = data => dispatch =>
-  api.user.signup(data).then(user => {
-    localStorage.bookwormJWT = user.token;
-    dispatch(userLoggedIn(user));
+
+  export const createUserRequest = user => ({
+    type: CREATE_USER_REQUEST,
+    user
   });
 
   export const fetchCurrentUser = () => (dispatch) => 

@@ -4,7 +4,7 @@ import { USER_FETCHED } from './../types';
 export default function user(state = {loaded:false}, action = {}) {
   switch (action.type) {
     case USER_LOGGED_IN:
-      return action.user;
+      return {...action.user,loaded:true};
     case USER_LOGGED_OUT:
       return {loaded:true};
       case USER_FETCHED:

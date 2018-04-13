@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import isEmail from "validator/lib/isEmail";
+import { createUserRequest } from "../../actions/users";
+import { connect } from 'react-redux';
 
 class SignupForm extends React.Component {
   state = {
@@ -25,10 +27,7 @@ class SignupForm extends React.Component {
     if (Object.keys(errors).length === 0) {
       this.setState({ loading: true });
       this.props
-        .submit(this.state.data)
-        .catch(err =>
-          this.setState({ errors: err.response.data.errors, loading: false })
-        );
+        .submit(this.state.data);
     }
   };
 
@@ -108,4 +107,6 @@ SignupForm.propTypes = {
   submit: PropTypes.func.isRequired
 };
 
-export default SignupForm;
+export default connect(null, { submit: createUserRequest })(
+  SignupForm
+);
