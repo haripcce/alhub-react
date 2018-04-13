@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import * as glamor from 'glamor';
 import glamorous from 'glamorous';
+import { slideInLeft } from 'react-animations'
 
-const fadeIn = () => {
-    const style = glamor.css.keyframes({
-        '0%': {opacity: '0'},
-        '100%':{opacity:'1'}
-    });
-    return {animation:`${style} 1s`};
-}
 
-const FadeInDiv = glamorous.div(fadeIn);
+
+const FadeInDiv = glamorous.div({
+    animation: `1s ${glamor.css.keyframes(slideInLeft)}`
+});
 
 class NewCharacterPage extends Component {
 
